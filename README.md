@@ -33,10 +33,10 @@ $ yarn generate
 - [x] Create the list layout
   - [x] Create the navbar component
   - [x] Create the filter component
-- [ ] Create the vehicles components
-  - [ ] Create the vehicules cards
-  - [ ] Create the vehicules list
-- [ ] Retrieve data from store
+- [x] Create the vehicles components
+  - [x] Create the vehicules cards
+  - [x] Create the vehicules list
+- [x] Retrieve data from store
 
 ### **Vehicule details**
 - [ ] Create the details layout
