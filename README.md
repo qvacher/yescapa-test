@@ -39,7 +39,8 @@ $ yarn generate
 - [x] Retrieve data from store
 
 ### **Vehicule details**
-- [ ] Create the details layout
+- [x] Create the details layout
+  - [x] Create the details page
+  - [x] Create the reassurance component
 - [ ] Create the details component
-- [ ] Create the reassurance component
 - [ ] Retrieve data from store
