@@ -5,6 +5,6 @@ export default {
    * @param {array} vehicules
    */
   ['SET_VEHICULES'](state, vehicules) {
-    state.vehicules = vehicules;
+    state.vehicules = vehicules.sort((a, b) => b.review_average - a.review_average);
   },
 }

@@ -5,11 +5,13 @@
       <Filters />
     </div>
     <!-- Vehicules list -->
-    <VehiculeList :vehicules="[]" />
+    <VehiculeList :vehicules="getVehicules" />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 import Filters from '~/components/Filters.vue';
 import VehiculeList from '~/components/vehicules/VehiculeList.vue';
 
@@ -19,6 +21,24 @@ export default {
   components: {
     Filters,
     VehiculeList,
+  },
+  async created() {
+    try {
+      await this.fetchVehicules();
+    } catch (error) {
+      /* Handler for errors: i.e notification system, etc... */
+      console.log(error);
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getVehicules: 'vehicules/getVehicules',
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchVehicules: 'vehicules/fetchVehicules',
+    })
   }
 }
 </script>
