@@ -3,12 +3,23 @@
 </template>
 
 <script>
-import VehiculesAPI from '../services/api/VehiculesAPI';
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'IndexPage',
   async mounted() {
-    const vehicules = await VehiculesAPI.fetchVehicules();
-    console.log(vehicules);
+    await this.fetchVehicules();
+    console.log(this.getVehicules);
+  },
+  computed: {
+    ...mapGetters({
+      getVehicules: 'vehicules/getVehicules',
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchVehicules: 'vehicules/fetchVehicules',
+    })
   }
 }
 </script>
