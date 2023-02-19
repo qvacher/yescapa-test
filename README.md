@@ -25,9 +25,9 @@ $ yarn generate
 - [x] Add axios for API handling
 
 ### **API & data**
-- [ ] Create API handlers
-- [ ] Create the store logic with modules
-- [ ] Save retrieved data from the API
+- [x] Create API handlers
+- [x] Create the store logic with modules
+- [x] Save retrieved data from the API
 
 ### **Vehicules list**
 - [ ] Create the list layout
