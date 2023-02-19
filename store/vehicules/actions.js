@@ -13,3 +13,15 @@ import VehiculesAPI from "~/services/api/VehiculesAPI";
     return Promise.resolve(true);
   }
 }
+
+/**
+ * Fetch a vehicule by its id
+ * @param commit
+ * @param state
+ * @returns {Promise<boolean>}
+ */
+export async function fetchVehiculeById({ state, commit }, vehiculeId) {
+  const vehicule = state.vehicules.find(vehicule => vehicule.id === vehiculeId);
+  commit('SET_VEHICULE', vehicule);
+  return Promise.resolve(true);
+}

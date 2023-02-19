@@ -2,21 +2,26 @@
   <div class="v-container w-full px-4 md:px-8 grid grid-cols-12 gap-4 sm:gap-8">
     <!-- Vehicule details -->
     <div class="col-span-12 sm:col-span-8">
-      <div class="v-details p-4 md:p-8">
+      <div class="v-details px-0 pb-4 md:px-8 md:pb-8">
         <!-- Vehicule image -->
-        <img src="#" alt="Location -" class="v-details__photo mb-6 md:mb-8 h-[240px] md:h-[480px]">
+        <img
+          :src="picture"
+          :alt="`Location - ${title}`"
+          class="v-details__photo mb-6 md:mb-8 h-[240px] md:h-[480px] object-cover w-full"
+          @error="replaceByPlaceholder"
+        />
         <!-- Vehicule basic information -->
         <div class="flex mb-8">
           <div class="v-details__owner mr-4 md:mr-4">
-            <img src="#" alt="Nom du propriétaire" class="w-16 h-16 md:h-28 md:w-28">
+            <img :src="vehicleOwnerPictureUrl" :alt="vehicleOwnerFirstName" class="w-16 h-16 md:h-28 md:w-28" />
           </div>
           <div class="v-details__description">
-            <h1 class="font-bold text-2xl">Location de camping car profilé</h1>
-            <p class="text-gray-500 mb-5">Bordeaux</p>
+            <h1 class="font-bold text-2xl">{{ title }}</h1>
+            <p class="text-gray-500 mb-5">{{ vehiculeLocationCity }}</p>
             <div class="v-details__reviews flex">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 place-self-center text-pink-500"><path fill-rule="evenodd" clip-rule="evenodd" d="m12.648 2.4 2.975 5.891 5.725.567a.724.724 0 0 1 .61.474.713.713 0 0 1-.17.748l-4.715 4.67 1.747 6.344a.713.713 0 0 1-.24.744.73.73 0 0 1-.783.086L12 19.054l-5.797 2.87a.73.73 0 0 1-.782-.087.713.713 0 0 1-.24-.743L6.93 14.75l-4.716-4.67a.713.713 0 0 1-.171-.75.724.724 0 0 1 .611-.473l5.724-.568 2.972-5.89A.725.725 0 0 1 12 2c.275 0 .527.155.649.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <span class="ml-1 font-bold">5,0</span>
-              <span class="ml-1">(10 avis)</span>
+              <span class="ml-1 font-bold">{{ reviewAverage }}</span>
+              <span class="ml-1">({{ reviewCount }} avis)</span>
             </div>
           </div>
         </div>
@@ -28,7 +33,7 @@
               <g fill="none" fill-rule="evenodd"><path d="M5 17h14v2c0 1.105-.784 2-1.75 2H6.75C5.784 21 5 20.105 5 19v-2zM6 17V7.833C6 6.821 6.895 6 8 6"></path><path d="M10 1.5A2.5 2.5 0 007.5 4v1A2.5 2.5 0 0010 7.5h4A2.5 2.5 0 0016.5 5V4A2.5 2.5 0 0014 1.5h-4zM18 11v6M4 15c7.969-1.2 12.636-4.2 14-9"></path></g>
             </svg>
             <p class="text-center text-sm mt-1">
-              <span class="font-bold">4 places</span><br />
+              <span class="font-bold">{{ vehiculeSeats }} places</span><br />
               <span>avec ceinture</span>
             </p>
           </div>
@@ -38,7 +43,7 @@
               <g fill="none" fill-rule="evenodd"><path d="M2 20v-7a3 3 0 013-3h14a3 3 0 013 3v7M2 16h20M4 10V6a3 3 0 013-3h10a3 3 0 013 3v4H4z"></path><path d="M8 10a3 3 0 013-3h2a3 3 0 013 3H8z"></path></g>
             </svg>
             <p class="text-center text-sm mt-1">
-              <span class="font-bold">4 places</span><br />
+              <span class="font-bold">{{ vehiculeBeds }} places</span><br />
               <span>couchage</span>
             </p>
           </div>
@@ -89,7 +94,7 @@
     <aside class="col-span-12 sm:col-span-4">
       <!-- Booking -->
       <div class="v-booking border p-4 md:p-8 mb-4 md:mb-8 rounded-lg">
-        <p class="font-bold text-lg mb-8">À partir de 70€/j</p>
+        <p class="font-bold text-lg mb-8">À partir de {{ startingPrice }}{{ currencyUsed }}/j</p>
         <button class="rounded-lg bg-pink-600 px-7 py-2 text-white block w-full min-h-[50px]">Demande de location</button>
       </div>
       <!-- Reassurance -->
@@ -99,6 +104,9 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+import imagePlaceholder from '~/mixins/imagePlaceholder.js';
+
 import Reassurance from '~/components/common/Reassurance.vue';
 
 export default {
@@ -106,6 +114,59 @@ export default {
   layout: 'list',
   components: {
     Reassurance,
+  },
+  mixins: [
+    imagePlaceholder,
+  ],
+  async created(){
+    const vehiculeId = parseInt(this.$route?.params?.id);
+    await this.fetchVehiculeById(vehiculeId);
+  },
+  computed: {
+    ...mapGetters({
+      getVehiculeById: 'vehicules/getVehiculeById',
+      getVehicule: 'vehicules/getVehicule',
+    }),
+    picture() {
+      return this.getVehicule?.pictures[0].url;
+    },
+    title() {
+      return this.getVehicule?.title;
+    },
+    vehicleOwnerFirstName() {
+      return this.getVehicule?.vehicle_owner_first_name;
+    },
+    vehicleOwnerPictureUrl(){
+      return this.getVehicule?.vehicle_owner_picture_url;
+    },
+    startingPrice() {
+      return this.getVehicule?.starting_price;
+    },
+    currencyUsed() {
+      let currencyUsed = '$';
+      if(this.getVehicule?.currency_used === 'EUR') currencyUsed = '€';
+      return currencyUsed;
+    },
+    vehiculeLocationCity() {
+      return this.getVehicule?.vehicle_location_city;
+    },
+    vehiculeSeats() {
+      return this.getVehicule?.vehicle_seats;
+    },
+    vehiculeBeds() {
+      return this.getVehicule?.vehicle_beds;
+    },
+    reviewAverage() {
+      return this.getVehicule?.review_average;
+    },
+    reviewCount() {
+      return this.getVehicule?.review_count;
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchVehiculeById: 'vehicules/fetchVehiculeById'
+    }),
   }
 }
 </script>

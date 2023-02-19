@@ -43,4 +43,4 @@ $ yarn generate
   - [x] Create the details page
   - [x] Create the reassurance component
 - [x] Create the details component
-- [ ] Retrieve data from store
+- [x] Retrieve data from store
