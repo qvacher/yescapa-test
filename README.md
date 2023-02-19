@@ -30,8 +30,12 @@ $ yarn generate
 - [x] Save retrieved data from the API
 
 ### **Vehicules list**
-- [ ] Create the list layout
-- [ ] Create the vehicles card component
+- [x] Create the list layout
+  - [x] Create the navbar component
+  - [x] Create the filter component
+- [ ] Create the vehicles components
+  - [ ] Create the vehicules cards
+  - [ ] Create the vehicules list
 - [ ] Retrieve data from store
 
 ### **Vehicule details**

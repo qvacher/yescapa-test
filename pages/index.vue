@@ -9,7 +9,6 @@ export default {
   name: 'IndexPage',
   async mounted() {
     await this.fetchVehicules();
-    console.log(this.getVehicules);
   },
   computed: {
     ...mapGetters({
