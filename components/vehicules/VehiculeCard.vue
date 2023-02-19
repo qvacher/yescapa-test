@@ -1,7 +1,12 @@
 <template>
   <article class="v-card border rounded-lg h-full cursor-pointer hover:shadow" @click="openDetails()">
     <div class="v-card__header">
-      <img :src="picture" :alt="`Location - ${title}`" class="h-52 w-full object-cover rounded-t-lg">
+      <img
+        :src="picture"
+        :alt="`Location - ${title}`"
+        class="h-52 w-full object-cover rounded-t-lg"
+        @error="replaceByPlaceholder"
+      />
     </div>
     <div class="v-card__body p-4 flex flex-col">
       <!-- Vehicule & price -->
@@ -31,6 +36,8 @@
 </template>
 
 <script>
+import imagePlaceholder from '~/mixins/imagePlaceholder.js';
+
 export default {
   name: 'VehiculeCard',
   props: {
@@ -39,6 +46,9 @@ export default {
       required: true
     }
   },
+  mixins: [
+    imagePlaceholder,
+  ],
   computed: {
     picture() {
       return this.vehicule?.pictures[0].url;
