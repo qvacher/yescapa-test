@@ -2,7 +2,7 @@
   <div class="v-container w-full px-4 md:px-8 grid grid-cols-12 gap-4 sm:gap-8">
     <!-- Vehicule details -->
     <div class="col-span-12 sm:col-span-8">
-      <div class="v-details px-0 pb-4 md:px-8 md:pb-8">
+      <div class="v-details px-0 pb-4 md:pb-8">
         <!-- Vehicule image -->
         <img
           :src="picture"
