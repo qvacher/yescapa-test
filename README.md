@@ -17,6 +17,12 @@ $ yarn start
 $ yarn generate
 ```
 
+## Run unit tests
+```bash
+# start the tests
+$ yarn run test
+```
+
 ## Test outputs
 
 ### **Create project and add librairies**
