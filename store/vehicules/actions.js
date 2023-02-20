@@ -23,5 +23,5 @@ import VehiculesAPI from "~/services/api/VehiculesAPI";
 export async function fetchVehiculeById({ state, commit }, vehiculeId) {
   const vehicule = state.vehicules.find(vehicule => vehicule.id === vehiculeId);
   commit('SET_VEHICULE', vehicule);
-  return Promise.resolve(true);
+  return Promise.resolve(vehicule);
 }

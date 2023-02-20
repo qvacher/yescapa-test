@@ -44,3 +44,13 @@ $ yarn generate
   - [x] Create the reassurance component
 - [x] Create the details component
 - [x] Retrieve data from store
+
+
+### **BONUS**
+- [x] Add jest
+  - [x] Create config
+- [x] Create tests folder for store
+  - [x] Tests for store
+  - [x] Tests for getters
+  - [x] Tests for actions
+  - [x] Tests for mutations
