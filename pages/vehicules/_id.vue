@@ -95,7 +95,19 @@
       <!-- Booking -->
       <div class="v-booking border p-4 md:p-8 mb-4 md:mb-8 rounded-lg">
         <p class="font-bold text-lg mb-8">À partir de {{ startingPrice }}{{ currencyUsed }}/j</p>
-        <button class="rounded-lg bg-pink-600 px-7 py-2 text-white block w-full min-h-[50px]">Demande de location</button>
+        <form class="mb-8 w-full block">
+          <div class="flex flex-col lg:flex-row justify-between">
+            <div class="form-row mr-0 mb-2 lg:mr-2 lg:mb-0">
+              <label for="departure-date" class="text-gray-500">Départ</label>
+              <input name="departure-date" type="date" placeholder="Ajouter une date" class="date-input border rounded-lg px-5 py-2 mt-2 w-full min-h-[50px] focus:outline-none focus:ring-1 focus:ring-gray-300">
+            </div>
+            <div class="form-row ml-0 mt-2 lg:ml-2 lg:mt-0">
+              <label for="return-date" class="text-gray-500">Retour</label>
+              <input name="return-date" type="date" placeholder="Ajouter une date" class="date-input border rounded-lg px-5 py-2 mt-2 w-full min-h-[50px] focus:outline-none focus:ring-1 focus:ring-gray-300">
+            </div>
+          </div>
+        </form>
+        <button class="rounded-lg bg-pink-600 px-7 py-2 text-white font-bold block w-full min-h-[50px]">Vérifier la disponibilité</button>
       </div>
       <!-- Reassurance -->
       <Reassurance />
